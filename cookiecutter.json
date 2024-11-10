@@ -1,0 +1,7 @@
+{
+  "name": "keycloak",
+  "version": "latest",
+  "namespace": "default",
+  "alias": null,
+  "repository": "https://charts.bitnami.com/bitnami"
+}
