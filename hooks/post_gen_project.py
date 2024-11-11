@@ -33,7 +33,7 @@ version: 0.0.0
 appVersion: {helm_app_version}
 dependencies:
   - name: {name}
-    {'alias: ' + alias + chr(10) + chr(9)+ chr(9) if alias else ''}version: {helm_version}
+    {'alias: ' + alias + chr(10) + '    ' if alias else ''}version: {helm_version}
     repository: {helm_repository}
 """
     dir_path = f"./upstream"
