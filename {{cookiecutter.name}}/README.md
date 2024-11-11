@@ -137,4 +137,4 @@ Please see the [CONTRIBUTING](CONTRIBUTING.md) file for guidelines on contributi
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [{{ cookiecutter.license }} License](LICENSE).
