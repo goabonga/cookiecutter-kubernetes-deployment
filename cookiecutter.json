@@ -3,5 +3,7 @@
   "version": "latest",
   "namespace": "default",
   "alias": null,
-  "repository": "https://charts.bitnami.com/bitnami"
+  "repository": "https://charts.bitnami.com/bitnami",
+  "author_name": "goabonga",
+  "license": ["MIT", "GPL", "Proprietary"]
 }
