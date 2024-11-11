@@ -4,6 +4,6 @@
   "namespace": "default",
   "alias": null,
   "repository": "https://charts.bitnami.com/bitnami",
-  "author_name": "goabonga",
+  "author_name": "Chris <goabonga@pm.me>",
   "license": ["MIT", "GPL", "Proprietary"]
 }

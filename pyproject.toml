@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "cookiecutter-flottille"
-version = "0.1.0"
-description = "**cookiecutter-flottille** is a template designed to help you quickly set up new machine learning projects using the **Flottille** library."
+name = "cookiecutter-kubernetes-deployment"
+version = "0.2.1"
+description = "📦 cookiecutter-kubernetes-deployment is a template generator for deploying applications using Helm and Kustomize on Kubernetes."
 authors = ["Chris <goabonga@pm.me>"]
 license = "MIT"
 readme = "README.md"
