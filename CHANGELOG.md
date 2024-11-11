@@ -1,3 +1,9 @@
+## 0.2.0 (2024-11-11)
+
+### Feat
+
+- generate clear readme, contributing and license files
+
 ## 0.1.1 (2024-11-11)
 
 ### Fix
