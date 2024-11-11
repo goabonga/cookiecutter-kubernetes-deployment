@@ -1,3 +1,10 @@
+## 0.2.1 (2024-11-11)
+
+### Fix
+
+- update contributing template to match with deployment coding standards
+- update readme template to display current helm version
+
 ## 0.2.0 (2024-11-11)
 
 ### Feat
