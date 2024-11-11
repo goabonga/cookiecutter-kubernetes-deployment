@@ -105,11 +105,13 @@ The configuration file allows setting the following parameters for project custo
 
 ```json
 {
-  "name": "keycloak",
+   "name": "keycloak",
   "version": "latest",
   "namespace": "default",
   "alias": null,
-  "repository": "https://charts.bitnami.com/bitnami"
+  "repository": "https://charts.bitnami.com/bitnami",
+  "author_name": "Chris <goabonga@pm.me>",
+  "license": "MIT"
 }
 ```
 
