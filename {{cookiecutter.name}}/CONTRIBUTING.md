@@ -53,11 +53,27 @@ There are several ways to contribute to {{cookiecutter.name}}:
 
 ## Coding Standards
 
-To maintain consistency across the project, please follow these guidelines:
+To maintain consistency and quality across the project, please adhere to the following guidelines:
 
-- **Code Style**: Use PEP8 for Python code.
-- **Documentation**: Document functions, classes, and modules where needed.
-- **Testing**: Ensure that your code has test coverage and passes existing tests.
+- **Helm Charts**: Follow Helm best practices for chart structure and `values.yaml` configuration. Avoid hardcoding sensitive data and use variables wherever possible. Document Helm charts using `helm-docs` to generate standardized and readable documentation for values and configurations.
+
+- **Kustomize**: Organize Kustomize overlays logically (e.g., `base`, `development`, `production`). Keep environment-specific configurations in the appropriate overlay folders, and avoid duplicating resources between overlays.
+
+- **YAML Formatting**: Keep YAML files clean and readable, with consistent indentation (2 spaces per level). Use comments to clarify complex configurations.
+
+- **Secrets Management**: For sensitive data, use `ksops` or an equivalent tool to handle encrypted secrets. Ensure secrets are organized by environment and kept out of the repository when unencrypted.
+
+- **Documentation**: Use `helm-docs` to automatically generate documentation for Helm charts, making it easy for other users to understand configurable values and chart details. Additionally, add comments in Kustomize files to clarify non-standard or complex configurations.
+
+- **Testing**: Validate all changes using `helm lint` and `kustomize build` to catch syntax issues early. Additionally, test deployments in a staging environment before merging to production.
+
+- **Commit Standards**: Make each modification a separate commit with a clear, descriptive message. For deployment changes, use a structured message format to specify the purpose of each change. Examples:
+  - `chore({{cookiecutter.name}}): configure postgresql connection`
+  - `chore({{cookiecutter.name}}): configure smtp connection`
+  - `feat({{cookiecutter.name}}): add custom metrics exporter`
+
+  Following this structure keeps commit history clean and makes it easy to track specific configuration changes over time.
+
 
 ## Issues and Bugs
 
