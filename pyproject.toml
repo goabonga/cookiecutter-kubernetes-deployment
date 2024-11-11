@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cookiecutter-kubernetes-deployment"
-version = "0.2.1"
+version = "0.2.2"
 description = "📦 cookiecutter-kubernetes-deployment is a template generator for deploying applications using Helm and Kustomize on Kubernetes."
 authors = ["Chris <goabonga@pm.me>"]
 license = "MIT"

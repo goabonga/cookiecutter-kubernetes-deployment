@@ -1,3 +1,10 @@
+## 0.2.2 (2024-11-11)
+
+### Fix
+
+- generated license link should to match with license type
+- project name and version do not match
+
 ## 0.2.1 (2024-11-11)
 
 ### Fix
