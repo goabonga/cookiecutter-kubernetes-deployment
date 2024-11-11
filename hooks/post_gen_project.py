@@ -88,6 +88,16 @@ def update_with_repo_url(readme_path, repo_url):
     with open(readme_path, 'w') as file:
         file.write(updated_content)
 
+def update_with(readme_path, pattern, value):
+    # Replace the placeholder <repo-url> with the actual repository URL
+    with open(readme_path, 'r') as file:
+        readme_content = file.read()
+    
+    updated_content = readme_content.replace(pattern, value)
+    
+    with open(readme_path, 'w') as file:
+        file.write(updated_content)
+
 def parse_github_info(repo_url):
     # Handle both SSH (git@github.com:username/repo.git) and HTTPS (https://github.com/username/repo.git) formats
     ssh_pattern = r"git@github\.com:(\w+)/([\w-]+)(?:\.git)?"
@@ -144,6 +154,7 @@ def main():
     helm_repo_add_update(helm_repository)
 
     helm_version, helm_app_version, helm_repository_chart = get_helm_info(name)
+    update_with("README.md", '<helm_version>',helm_version)
     
     create_chart_yaml(name, helm_version, helm_app_version, helm_repository, alias)
     create_values_yaml(name, helm_version, helm_repository_chart, alias)

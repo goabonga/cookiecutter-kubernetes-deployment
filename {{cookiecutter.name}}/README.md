@@ -1,7 +1,7 @@
 
-# {{cookiecutter.name}} deployment
+# {{cookiecutter.name}} Deployment
 
-This repository contains the infrastructure configuration for deploying {{cookiecutter.name}} using a combination of Helm and Kustomize. The directory structure is generated with a cookie cutter template and is organized to support multiple environments, including development and production.
+This repository contains the infrastructure configuration for deploying **{{cookiecutter.name}}** using a combination of **Helm** and **Kustomize**.
 
 ## Table of Contents
 
@@ -16,7 +16,7 @@ This repository contains the infrastructure configuration for deploying {{cookie
 
 ## Overview
 
-This deployment setup uses Helm to manage {{cookiecutter.name}} resources and Kustomize to overlay environment-specific configurations, providing a flexible approach for managing configurations across development and production environments.
+This deployment setup uses **Helm** to manage **{{cookiecutter.name}}** resources and **Kustomize** to overlay environment-specific configurations, providing a flexible approach for managing configurations across **development** and **production** environments.
 
 ## Directory Structure
 
@@ -40,7 +40,7 @@ The main folders and files are organized as follows:
 ├── upstream
 │   ├── Chart.lock                   # Lock file for Helm dependencies
 │   ├── charts
-│   │   └── {{cookiecutter.name}}-24.1.0.tgz      # Packaged Helm chart
+│   │   └── {{cookiecutter.name}}-<helm_version>.tgz      # Packaged Helm chart
 │   ├── Chart.yaml                   # Helm chart metadata
 │   ├── README.md                    # Documentation for Helm chart
 │   └── values.yaml                  # Default Helm values
@@ -49,11 +49,11 @@ The main folders and files are organized as follows:
 
 ### Key Components
 
-- **base/**: Contains the base Kustomize configuration that can be applied to any environment.
-- **overlays/**: Contains environment-specific configurations for development and production, including custom secrets.
-- **resources/**: Includes additional resources for Kustomize, like the upstream configuration.
-- **upstream/**: Houses the Helm chart and dependencies for {{cookiecutter.name}}.
-- **upstream.sh**: Script for managing Helm and Kustomize setup and updates.
+- **base/**: Contains the base **Kustomize** configuration that can be applied to any environment.
+- **overlays/**: Contains environment-specific configurations for **development** and **production**, including **Ksops** secrets generator.
+- **resources/**: Includes additional resources for **Kustomize**, like the upstream configuration.
+- **upstream/**: Houses the **Helm** chart and dependencies for **{{cookiecutter.name}}**.
+- **upstream.sh**: Script for managing **Helm** and **Kustomize** setup and updates.
 
 ## Getting Started
 
@@ -83,36 +83,47 @@ This setup supports two main environments:
 - **Development**: Configurations in `overlays/development`
 - **Production**: Configurations in `overlays/production`
 
-Each environment has its own secrets and customizations, managed by Kustomize overlays.
+Each environment has its own secrets and customizations, managed by **Kustomize** overlays.
 
 ## Usage
 
-### Deploying {{cookiecutter.name}}
+### Deploying **{{cookiecutter.name}}**
 
-To deploy {{cookiecutter.name}} to a specific environment, use the following commands:
+To deploy **{{cookiecutter.name}}** to an environment, choose one of the following methods based on whether you are using secrets encrypted with `ksops` or plain configurations:
 
-#### Development
-If you are using ksops to manage secrets, use the command with `--enable-alpha-plugins` and `--enable-exec`:
+#### Deploying with Secrets (using ksops)
+
+If your deployment requires managing secrets with `ksops`, use the following command. This approach enables additional Kustomize plugins required to handle encrypted secrets:
 
 ```bash
-kustomize build --enable-alpha-plugins --enable-exec overlays/development | kubectl apply -f -
+kustomize build --enable-alpha-plugins --enable-exec overlays/<environment> | kubectl apply -f -
 ```
 
-#### Production
+Replace `<environment>` with the target environment directory (e.g., `development` or `production`).
+
+#### Deploying without Secrets
+
+For deployments without encrypted secrets, you can use a standard Kustomize command:
+
 ```bash
-kubectl apply -k overlays/production
+kubectl apply -k overlays/<environment>
 ```
+
+Again, replace `<environment>` with the target environment directory (e.g., `development` or `production`).
 
 ### Cleaning Up
 
 To remove the deployment from a specific environment:
+
 ```bash
 kubectl delete -k overlays/<environment>
 ```
 
+Replace `<environment>` with the appropriate environment directory (e.g., `development` or `production`).
+
 ## Updating the Upstream Helm Chart
 
-To update the {{cookiecutter.name}} Helm chart:
+To update the `{{cookiecutter.name}}` Helm chart:
 
 1. Modify the `values.yaml` in `upstream` with any new configurations required.
 2. Regenerate the `resources/upstream.yaml` and the documentation by executing the `upstream.sh` script:
@@ -122,7 +133,7 @@ To update the {{cookiecutter.name}} Helm chart:
 
 ## Contributing
 
-Please see the `CONTRIBUTING.md` file for guidelines on contributing to this project.
+Please see the [CONTRIBUTING](CONTRIBUTING.md) file for guidelines on contributing to this project.
 
 ## License
 
