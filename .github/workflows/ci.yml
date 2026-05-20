@@ -29,6 +29,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Sync
         run: uv sync --frozen
       - name: Lint
@@ -46,6 +47,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Check SPDX headers
         run: |
           uv run python scripts/add_license_header.py --path tests --types py --check
@@ -64,6 +66,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Sync
         run: uv sync --frozen
       - name: Install Helm
@@ -86,6 +89,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Build sdist + wheel
         run: uv build --out-dir dist
       - name: Verify template + hooks are bundled with literal {{ }} names
@@ -117,6 +121,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Sync
         run: uv sync --frozen
       - name: Run pip-audit
@@ -159,6 +164,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Install multicz
         run: uv tool install multicz
       - name: Configure git author
@@ -255,6 +261,7 @@ jobs:
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
+          cache-suffix: ${{ github.job }}
       - name: Install multicz
         run: uv tool install multicz
       - name: Build wheel and sdist
