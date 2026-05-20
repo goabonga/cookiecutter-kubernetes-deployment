@@ -1,6 +1,0 @@
-[tool.commitizen]
-version = "0.2.2"
-tag_format = "$major.$minor.$patch$prerelease"
-version_files = [
-    "pyproject.toml:version",
-]
