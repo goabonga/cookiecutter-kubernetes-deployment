@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2024-2026 Chris <goabonga@pm.me>
+
+# multicz.toml - versioning, changelog and tagging for the cookiecutter
+# template, driven by Conventional Commits.
+# Docs: https://goabonga.github.io/multicz/
+
+[project]
+commit_convention = "conventional"
+tag_format = "{version}"
+initial_version = "0.2.2"
+# Regenerate uv.lock after each bump so the lockfile records the new
+# project version; without `allow` multicz skips the hook and the next
+# `uv sync --frozen` in CI fails on lockfile drift.
+post_bump_policy = "allow"
+state_file = ".multicz/state.json"
+
+[project.bump_rules]
+feat = "minor"
+fix = "patch"
+perf = "patch"
+revert = "patch"
+deprecate = "minor"
+remove = "minor"
+
+[[project.changelog_sections]]
+title = "Added"
+types = ["feat"]
+
+[[project.changelog_sections]]
+title = "Deprecated"
+types = ["deprecate"]
+
+[[project.changelog_sections]]
+title = "Removed"
+types = ["remove"]
+
+[[project.changelog_sections]]
+title = "Fixed"
+types = ["fix"]
+
+[[project.changelog_sections]]
+title = "Performance"
+types = ["perf"]
+
+[components.cookiecutter-kustomize-deployment]
+# The deliverable is the template: the cookiecutter.json prompts, the
+# templated tree and the generation hooks. pyproject.toml carries the
+# packaged version and the build/dependency metadata shipped to PyPI.
+paths = [
+    "cookiecutter.json",
+    "{{cookiecutter.name}}/**",
+    "hooks/**",
+    "pyproject.toml",
+]
+bump_files = [
+    { file = "pyproject.toml", key = "project.version" },
+]
+changelog = "CHANGELOG.md"
+post_bump = ["uv lock"]
+
+[[components.cookiecutter-kustomize-deployment.artifacts]]
+type = "pypi"
+ref = "cookiecutter-kustomize-deployment=={version}"
