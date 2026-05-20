@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "git_head": "de170902e340d610c83835dd79533b93024198d6",
+  "git_head_short": "de17090",
+  "timestamp": "2026-05-20T14:54:47Z",
+  "components": {
+    "cookiecutter-kustomize-deployment": {
+      "version": "0.2.3",
+      "tag": "0.2.3",
+      "tag_sha": null
+    }
+  }
+}
