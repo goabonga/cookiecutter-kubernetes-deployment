@@ -59,6 +59,9 @@ target-version = "py312"
 # The template tree and the generation hooks are Jinja-templated (not
 # valid standalone Python/YAML); never lint or format them.
 extend-exclude = [".venv", "{{cookiecutter.name}}", "hooks"]
+# Honour extend-exclude even when paths are passed explicitly (e.g. by
+# pre-commit), so the Jinja hooks are never linted.
+force-exclude = true
 
 [tool.ruff.lint]
 select = [
