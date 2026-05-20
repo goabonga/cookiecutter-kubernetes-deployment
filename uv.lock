@@ -148,7 +148,7 @@ wheels = [
 
 [[package]]
 name = "cookiecutter-kubernetes-deployment"
-version = "0.2.2"
+version = "0.2.3"
 source = { editable = "." }
 
 [package.dev-dependencies]

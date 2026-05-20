@@ -6,6 +6,12 @@ adheres to [Semantic Versioning](https://semver.org/). New entries are
 generated from [Conventional Commits](https://www.conventionalcommits.org/)
 by [multicz](https://github.com/goabonga/multicz).
 
+## [0.2.3] - 2026-05-20
+
+### Fixed
+
+- complete PyPI package metadata (`de17090`)
+
 ## [0.2.2] - 2024-11-11
 
 ### Fixed
