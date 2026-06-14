@@ -115,8 +115,17 @@ dependencies:
         chart_file.write(chart_content)
 
 def create_values_yaml(name, helm_version, helm_repository_chart, alias=None):
-    values_result = subprocess.check_output(f"helm show values {helm_repository_chart} --version {helm_version}", shell=True).decode('utf-8')
-    values_content = f"{alias or name}:\n" + '\n'.join(f"  {line}" for line in values_result.splitlines())
+    # Fetching the upstream defaults can fail (private/unauthenticated registry,
+    # network issues); fall back to an empty override block so generation still
+    # succeeds and the user can fill values in later.
+    version_flag = f" --version {helm_version}" if helm_version and helm_version != "0.0.0" else ""
+    try:
+        values_result = subprocess.check_output(
+            f"helm show values {helm_repository_chart}{version_flag}", shell=True
+        ).decode('utf-8')
+        values_content = f"{alias or name}:\n" + '\n'.join(f"  {line}" for line in values_result.splitlines())
+    except subprocess.CalledProcessError:
+        values_content = f"{alias or name}: {{}}\n"
 
     dir_path = f"./upstream"
     os.makedirs(dir_path, exist_ok=True)
