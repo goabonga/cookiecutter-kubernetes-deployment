@@ -6,6 +6,14 @@ adheres to [Semantic Versioning](https://semver.org/). New entries are
 generated from [Conventional Commits](https://www.conventionalcommits.org/)
 by [multicz](https://github.com/goabonga/multicz).
 
+## [0.2.5] - 2026-06-14
+
+### Fixed
+
+- **hooks**: default alias to "none" and treat it as no alias (`307a99b`)
+- **hooks**: don't crash when upstream values cannot be fetched (`889b8d7`)
+- **hooks**: avoid literal {{ }} that breaks Jinja rendering (`136f677`)
+
 ## [0.2.4] - 2026-06-14
 
 ### Fixed
