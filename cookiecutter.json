@@ -2,7 +2,7 @@
   "name": "keycloak",
   "version": "latest",
   "namespace": "default",
-  "alias": null,
+  "alias": "none",
   "repository": "https://charts.bitnami.com/bitnami",
   "author_name": "Chris <goabonga@pm.me>",
   "license": ["MIT", "GPL", "Proprietary"]
