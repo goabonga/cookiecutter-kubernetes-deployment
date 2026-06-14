@@ -117,7 +117,7 @@ dependencies:
 def create_values_yaml(name, helm_version, helm_repository_chart, alias=None):
     values_result = subprocess.check_output(f"helm show values {helm_repository_chart} --version {helm_version}", shell=True).decode('utf-8')
     values_content = f"{alias or name}:\n" + '\n'.join(f"  {line}" for line in values_result.splitlines())
-    
+
     dir_path = f"./upstream"
     os.makedirs(dir_path, exist_ok=True)
     with open(os.path.join(dir_path, 'values.yaml'), 'w') as values_file:
@@ -190,6 +190,10 @@ def main():
     name = '{{ cookiecutter.name }}'
     version = '{{ cookiecutter.version }}'
     alias = {% if cookiecutter.alias %}'{{ cookiecutter.alias }}'{% else %}None{% endif %}
+    # cookiecutter prompts cannot be left empty, so "none" (any case) and blank
+    # values are treated as "no alias".
+    if alias is None or alias.strip().lower() in ("", "none"):
+        alias = None
     helm_repository = '{{ cookiecutter.repository }}'
   
     # Retrieve the Git repository URL and update README.md
