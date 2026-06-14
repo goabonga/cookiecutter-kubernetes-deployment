@@ -6,6 +6,13 @@ adheres to [Semantic Versioning](https://semver.org/). New entries are
 generated from [Conventional Commits](https://www.conventionalcommits.org/)
 by [multicz](https://github.com/goabonga/multicz).
 
+## [0.2.4] - 2026-06-14
+
+### Fixed
+
+- **hooks**: support OCI registries and avoid crash on missing chart metadata (`b2e528a`)
+- **hooks**: treat empty alias as null (`fc096c8`)
+
 ## [0.2.3] - 2026-05-20
 
 ### Fixed
