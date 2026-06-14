@@ -31,7 +31,24 @@ def slugify(value):
     value = re.sub(r'[^a-zA-Z0-9-]+', '-', value)
     return value.strip('-').lower()
 
+def is_oci_repository(repository_url):
+    # OCI registries are referenced either with an explicit "oci://" scheme or
+    # as a bare registry host/path (e.g. ghcr.io/owner/charts) without a scheme.
+    scheme = urlparse(repository_url).scheme
+    return scheme in ("", "oci")
+
+def oci_chart_ref(repository_url, name):
+    # Build the fully qualified OCI chart reference (oci://host/path/name).
+    base = repository_url.rstrip('/')
+    if not base.startswith("oci://"):
+        base = "oci://" + base
+    return f"{base}/{name}"
+
 def helm_repo_add_update(repository_url):
+    # OCI registries are pulled directly and must not be registered as a repo.
+    if is_oci_repository(repository_url):
+        return
+
     # Parse the repository URL to get the host and create a slug from it
     parsed_url = urlparse(repository_url)
     repo_host = parsed_url.netloc
@@ -41,14 +58,47 @@ def helm_repo_add_update(repository_url):
     subprocess.call(f"helm repo add {repo_name} {repository_url}", shell=True)
     subprocess.call("helm repo update", shell=True)
 
-def get_helm_info(name):
-    search_result = subprocess.check_output(f"helm search repo {name}", shell=True).decode('utf-8').splitlines()
-    helm_version = next((line.split()[1] for line in search_result if name in line), None)
-    helm_app_version = next((line.split()[2] for line in search_result if name in line), None)
-    helm_repository_chart = next((line.split()[0] for line in search_result if name in line), None)
+def parse_chart_metadata(chart_yaml):
+    # Extract version/appVersion from the YAML emitted by `helm show chart`.
+    version = next((line.split(":", 1)[1].strip() for line in chart_yaml.splitlines() if line.startswith("version:")), None)
+    app_version = next((line.split(":", 1)[1].strip() for line in chart_yaml.splitlines() if line.startswith("appVersion:")), None)
+    return version, app_version
+
+def get_helm_info(name, repository_url, version=None):
+    # Resolve the chart reference: OCI pulls use oci://host/path/name, classic
+    # HTTP repositories use the local "<repo-slug>/<name>" alias.
+    if is_oci_repository(repository_url):
+        helm_repository_chart = oci_chart_ref(repository_url, name)
+    else:
+        repo_name = slugify(urlparse(repository_url).netloc)
+        helm_repository_chart = f"{repo_name}/{name}"
+
+    # Only pin a version when the user requested an explicit one.
+    version_flag = f" --version {version}" if version and version != "latest" else ""
+
+    try:
+        chart_yaml = subprocess.check_output(
+            f"helm show chart {helm_repository_chart}{version_flag}", shell=True
+        ).decode('utf-8')
+        helm_version, helm_app_version = parse_chart_metadata(chart_yaml)
+    except subprocess.CalledProcessError:
+        helm_version, helm_app_version = None, None
+
+    # Fall back to the requested version (or a placeholder) so generation never
+    # crashes when the chart metadata cannot be fetched.
+    if not helm_version:
+        helm_version = version if version and version != "latest" else "0.0.0"
+    if not helm_app_version:
+        helm_app_version = helm_version
+
     return helm_version, helm_app_version, helm_repository_chart
 
 def create_chart_yaml(name, helm_version, helm_app_version, helm_repository, alias=None):
+    # OCI dependencies must declare the repository with an oci:// scheme.
+    if is_oci_repository(helm_repository):
+        helm_repository = helm_repository.rstrip('/')
+        if not helm_repository.startswith("oci://"):
+            helm_repository = "oci://" + helm_repository
     chart_content = f"""apiVersion: v2
 name: {name}
 type: application
@@ -138,6 +188,7 @@ def main():
     copy_license()
 
     name = '{{ cookiecutter.name }}'
+    version = '{{ cookiecutter.version }}'
     alias = {% if cookiecutter.alias != None %}'{{cookiecutter.alias}}'{% else%}None{% endif %}
     helm_repository = '{{ cookiecutter.repository }}'
   
@@ -156,8 +207,8 @@ def main():
     # Add and update the helm repo
     helm_repo_add_update(helm_repository)
 
-    helm_version, helm_app_version, helm_repository_chart = get_helm_info(name)
-    update_with("README.md", '<helm_version>',helm_version)
+    helm_version, helm_app_version, helm_repository_chart = get_helm_info(name, helm_repository, version)
+    update_with("README.md", '<helm_version>', helm_version)
     
     create_chart_yaml(name, helm_version, helm_app_version, helm_repository, alias)
     create_values_yaml(name, helm_version, helm_repository_chart, alias)
