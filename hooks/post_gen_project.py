@@ -125,7 +125,7 @@ def create_values_yaml(name, helm_version, helm_repository_chart, alias=None):
         ).decode('utf-8')
         values_content = f"{alias or name}:\n" + '\n'.join(f"  {line}" for line in values_result.splitlines())
     except subprocess.CalledProcessError:
-        values_content = f"{alias or name}: {{}}\n"
+        values_content = f"{alias or name}: " + "{}\n"
 
     dir_path = f"./upstream"
     os.makedirs(dir_path, exist_ok=True)
