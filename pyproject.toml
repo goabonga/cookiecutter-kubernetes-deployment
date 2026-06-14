@@ -3,7 +3,7 @@
 
 [project]
 name = "cookiecutter-kustomize-deployment"
-version = "0.2.3"
+version = "0.2.4"
 description = "A Cookiecutter template to scaffold Helm + Kustomize Kubernetes deployments with per-environment overlays."
 readme = "README.md"
 requires-python = ">=3.12"
