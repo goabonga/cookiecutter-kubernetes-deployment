@@ -189,7 +189,7 @@ def main():
 
     name = '{{ cookiecutter.name }}'
     version = '{{ cookiecutter.version }}'
-    alias = {% if cookiecutter.alias != None %}'{{cookiecutter.alias}}'{% else%}None{% endif %}
+    alias = {% if cookiecutter.alias %}'{{ cookiecutter.alias }}'{% else %}None{% endif %}
     helm_repository = '{{ cookiecutter.repository }}'
   
     # Retrieve the Git repository URL and update README.md
