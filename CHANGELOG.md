@@ -6,6 +6,26 @@ adheres to [Semantic Versioning](https://semver.org/). New entries are
 generated from [Conventional Commits](https://www.conventionalcommits.org/)
 by [multicz](https://github.com/goabonga/multicz).
 
+## [0.3.0] - 2026-09-04
+
+### Added
+
+- generate clear readme, contributing and license files (`2cb55f5`)
+
+### Fixed
+
+- indentation use space instead of tab when alias is defined (`169c346`)
+- update readme template to display current helm version (`69cb6e5`)
+- update contributing template to match with deployment coding standards (`80d1e35`)
+- project name and version do not match (`d8b918a`)
+- generated license link should to match with license type (`0ec5189`)
+- complete PyPI package metadata (`ec2558f`)
+- **hooks**: support OCI registries and avoid crash on missing chart metadata (`6e3e3ea`)
+- **hooks**: treat empty alias as null (`551b320`)
+- **hooks**: default alias to "none" and treat it as no alias (`3b21a8a`)
+- **hooks**: don't crash when upstream values cannot be fetched (`6d53a53`)
+- **hooks**: avoid literal {{ }} that breaks Jinja rendering (`8322e3f`)
+
 ## [0.2.5] - 2026-06-14
 
 ### Fixed
