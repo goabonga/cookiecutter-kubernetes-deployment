@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  SPDX-License-Identifier: MIT
+  Copyright (c) 2024-2026 Chris <goabonga@pm.me>
+
+  Master logo for cookiecutter-kustomize-deployment.
+
+  The Kubernetes helm wheel drawn as a cookie cutter: a seven-sided
+  outline with seven spokes running out of a single hub, the way every
+  overlay this template bakes runs out of a single Kustomize base. The
+  palette is Kubernetes' own blue, the platform the deployment targets.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <!-- Rounded shell -->
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="#1E4CA1"/>
+  <rect x="34" y="34" width="188" height="188" rx="40" fill="#326CE5"/>
+  <!-- Cutter rim: the seven-sided helm wheel -->
+  <path d="M128 54 L185.86 81.86 L200.14 144.47 L160.11 194.67 L95.89 194.67 L55.86 144.47 L70.14 81.86 Z"
+        fill="none" stroke="#FFFFFF" stroke-width="11" stroke-linejoin="round"/>
+  <!-- Spokes: every overlay inherits from the same hub -->
+  <g stroke="#FFFFFF" stroke-width="10" stroke-linecap="round">
+    <path d="M128 102 L128 62"/>
+    <path d="M148.33 111.79 L179.60 86.85"/>
+    <path d="M153.35 133.79 L192.35 142.69"/>
+    <path d="M139.28 151.43 L156.64 187.46"/>
+    <path d="M116.72 151.43 L99.36 187.46"/>
+    <path d="M102.65 133.79 L63.65 142.69"/>
+    <path d="M107.67 111.79 L76.40 86.85"/>
+  </g>
+  <!-- Hub: the Kustomize base -->
+  <circle cx="128" cy="128" r="17" fill="#FFFFFF"/>
+</svg>
