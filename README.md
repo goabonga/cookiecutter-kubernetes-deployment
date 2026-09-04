@@ -21,11 +21,11 @@ version and renders its `values.yaml` automatically.
 
 ## Features
 
-- **Helm + Kustomize** — a vendored upstream Helm chart wrapped in a Kustomize
+- **Helm + Kustomize** - a vendored upstream Helm chart wrapped in a Kustomize
   `base` with `development` / `production` overlays.
-- **Dynamic chart details** — the post-gen hook pulls the latest chart version
+- **Dynamic chart details** - the post-gen hook pulls the latest chart version
   and values so the deployment starts up to date.
-- **Generated governance** — the rendered project ships its own README,
+- **Generated governance** - the rendered project ships its own README,
   CONTRIBUTING, CODE_OF_CONDUCT and a license of your choice (MIT / GPL /
   Proprietary).
 
@@ -33,7 +33,7 @@ version and renders its `values.yaml` automatically.
 
 - Python 3.12+
 - [Helm](https://helm.sh/docs/intro/install/) and
-  [helm-docs](https://github.com/norwoodj/helm-docs) on your `PATH` — the
+  [helm-docs](https://github.com/norwoodj/helm-docs) on your `PATH` - the
   post-generation hook calls them (with network access to the chart repo).
 
 ## Usage
