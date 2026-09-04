@@ -1,9 +1,18 @@
-# cookiecutter-kustomize-deployment
+<h1 align="center">
+  <img src="https://raw.githubusercontent.com/goabonga/cookiecutter-kustomize-deployment/main/assets/cookiecutter-kustomize-deployment.svg" alt="cookiecutter-kustomize-deployment" width="120" /><br/>
+  cookiecutter-kustomize-deployment
+</h1>
 
-[![CI](https://github.com/goabonga/cookiecutter-kustomize-deployment/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/goabonga/cookiecutter-kustomize-deployment/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/goabonga/cookiecutter-kustomize-deployment/blob/main/LICENSE)
-[![Python](https://img.shields.io/badge/python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
-[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+<p align="center">
+  <em>Scaffold a Helm + Kustomize Kubernetes deployment, environment overlays included.</em>
+</p>
+
+<p align="center">
+  <a href="https://github.com/goabonga/cookiecutter-kustomize-deployment/actions/workflows/ci.yml"><img src="https://github.com/goabonga/cookiecutter-kustomize-deployment/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI"/></a>
+  <a href="https://github.com/goabonga/cookiecutter-kustomize-deployment/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"/></a>
+  <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.12%2B-blue.svg" alt="Python"/></a>
+  <a href="https://github.com/astral-sh/uv"><img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" alt="uv"/></a>
+</p>
 
 A [Cookiecutter](https://cookiecutter.readthedocs.io/) template that scaffolds
 a Kubernetes deployment combining a **Helm** upstream chart with **Kustomize**
